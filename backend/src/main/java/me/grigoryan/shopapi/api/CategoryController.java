@@ -11,9 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created By Zhu Lin on 3/10/2018.
- */
+
 @RestController
 @CrossOrigin
 public class CategoryController {
@@ -23,14 +21,6 @@ public class CategoryController {
     ProductService productService;
 
 
-    /**
-     * Show products in category
-     *
-     * @param categoryType
-     * @param page
-     * @param size
-     * @return
-     */
     @GetMapping("/category/{type}")
     public CategoryPage showOne(@PathVariable("type") Integer categoryType,
                                 @RequestParam(value = "page", defaultValue = "1") Integer page,

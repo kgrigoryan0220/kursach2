@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * Created By Zhu Lin on 3/10/2018.
- */
 @CrossOrigin
 @RestController
 public class ProductController {
@@ -22,10 +19,6 @@ public class ProductController {
     CategoryService categoryService;
     @Autowired
     ProductService productService;
-
-    /**
-     * Show All Categories
-     */
 
     @GetMapping("/product")
     public Page<ProductInfo> findAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -39,11 +32,7 @@ public class ProductController {
 
         ProductInfo productInfo = productService.findOne(productId);
 
-//        // Product is not available
-//        if (productInfo.getProductStatus().equals(ProductStatusEnum.DOWN.getCode())) {
-//            productInfo = null;
-//        }
-
+//
         return productInfo;
     }
 
