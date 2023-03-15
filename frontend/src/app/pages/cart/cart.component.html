@@ -1,0 +1,59 @@
+<h1 align="center" class="display-4 mb-5">Моя корзина</h1>
+
+<!--Cart Detail Table-->
+<table class="table table-striped text-center">
+    <thead>
+    <tr>
+        <th scope="col">Фото</th>
+        <th scope="col">Наименование</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Кол-во</th>
+        <th scope="col">Итог</th>
+        <th scope="col">Действия</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let productInOrder of productInOrders">
+        <th class="align-middle" scope="row">
+            <a routerLink="/product/{{productInOrder.productId}}"><img height="100px"
+                                                                       src="{{productInOrder.productIcon}}"
+                                                                       alt="{{productInOrder.productName}}"></a>
+        </th>
+        <td class="align-middle"><a
+                routerLink="/product/{{productInOrder.productId}}">{{productInOrder.productName}}</a></td>
+        <td class="align-middle"> Br {{productInOrder.productPrice}}</td>
+
+        <td class="align-middle">
+            <a (click)="minusOne(productInOrder)"><i class="fa fa-minus"></i></a>
+            <input min="1" id="{{productInOrder.productId}}"
+                   [max]=productInOrder.productStock
+                   [(ngModel)]="productInOrder.count"
+                   (change)="onChange(productInOrder)"
+                   size="5"
+                   type="number"
+                   required
+                   name='count'>
+            <a (click)="addOne(productInOrder)"> <i class="fa fa-plus"></i></a>
+        </td>
+
+        <td class="align-middle"> Br {{productInOrder.productPrice * productInOrder.count}}</td>
+        <td class="align-middle">
+            <a (click)="remove(productInOrder)" routerLink="./">Удалить</a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<div *ngIf="productInOrders?.length > 0; else empty">
+    <h5 style="display: inline;">Сумма: Br {{total}}</h5>
+    <button (click)="checkout()" class="btn btn-warning float-right">Добавить</button>
+</div>
+<ng-template #empty>
+    <h4 class="text-muted text-center">Корзина пуста. Добавьте что-то из католога, чтобы поставить мне 4 :)</h4>
+</ng-template>
+
+
